@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "SInteractionComponent.h"
 #include "SCharacter.generated.h"
 
 class UCameraComponent;
@@ -28,7 +29,10 @@ protected:
 	USpringArmComponent* SpringArmComp;
 
 	UPROPERTY(VisibleAnywhere)
-	UCameraComponent* CamerComp;
+	UCameraComponent* CameraComp;
+
+	UPROPERTY(VisibleAnywhere)
+	USInteractionComponent* InteractionComp;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -36,6 +40,7 @@ protected:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void PrimaryAttack();
+	void PrimaryInteract();
 
 public:	
 	// Called every frame

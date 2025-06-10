@@ -4,21 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "SGameplayInterface.h"
 #include "SItemChest.generated.h"
 
 UCLASS()
-class UNREALPREACTICE_API ASItemChest : public AActor
+class UNREALPREACTICE_API ASItemChest : public AActor, public ISGameplayInterface
 {
 	GENERATED_BODY()
+
+	void Interact_Implementation(APawn* InstigatorPawn);
 
 public:
 	UPROPERTY(EditAnywhere)
 	float TargetPitch;
-
-
-public:	
-	// Sets default values for this actor's properties
-	ASItemChest();
 
 protected:
 
@@ -34,5 +32,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	// Sets default values for this actor's properties
+	ASItemChest();
 
 };

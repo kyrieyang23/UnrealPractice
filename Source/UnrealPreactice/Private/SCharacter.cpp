@@ -16,8 +16,10 @@ ASCharacter::ASCharacter()
 	SpringArmComp->bUsePawnControlRotation = true; // Rotate the arm based on the controller
 	SpringArmComp->SetupAttachment(RootComponent);
 
-	CamerComp = CreateDefaultSubobject<UCameraComponent>("CameraComp");
-	CamerComp->SetupAttachment(SpringArmComp);
+	CameraComp = CreateDefaultSubobject<UCameraComponent>("CameraComp");
+	CameraComp->SetupAttachment(SpringArmComp);
+
+	InteractionComp = CreateDefaultSubobject<USInteractionComponent>("InteractionComp");
 
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Rotate character to movement direction
 
@@ -87,5 +89,14 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 
 	PlayerInputComponent->BindAction("PrimaryAttack", IE_Pressed, this, &ASCharacter::PrimaryAttack);
+	PlayerInputComponent->BindAction("PrimaryInteract", IE_Pressed, this, &ASCharacter::PrimaryInteract);
 }
 
+
+void ASCharacter::PrimaryInteract()
+{
+	if (InteractionComp)
+	{
+		InteractionComp->PrimaryInteract();
+	}
+}
