@@ -9,6 +9,8 @@
 
 class UCameraComponent;
 class USpringArmComponent;
+class USInteractionComponent;
+class UAnimMontage;
 
 UCLASS()
 class UNREALPREACTICE_API ASCharacter : public ACharacter
@@ -18,6 +20,12 @@ class UNREALPREACTICE_API ASCharacter : public ACharacter
 protected:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TSubclassOf<AActor> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	UAnimMontage* AttackAnim;
+
+	FTimerHandle TimerHandle_PrimaryAttack;
+
 
 public:
 	// Sets default values for this character's properties
@@ -41,6 +49,7 @@ protected:
 	void MoveRight(float Value);
 	void PrimaryAttack();
 	void PrimaryInteract();
+	void PrimaryAttack_TimeElapsed();
 
 public:	
 	// Called every frame
